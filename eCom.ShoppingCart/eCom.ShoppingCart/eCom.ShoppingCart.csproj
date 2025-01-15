@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>5445f100-6132-4381-970e-e984a874123a</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+    <PackageReference Include="WolverineFx.Http.FluentValidation" Version="3.6.3" />
+    <PackageReference Include="WolverineFx.Http.Marten" Version="3.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SubmittedCart\" />
+    <Folder Include="SubmitCart\" />
+  </ItemGroup>
+
+</Project>

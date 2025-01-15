@@ -1,0 +1,6 @@
+@eCom.Inventory_HostAddress = http://localhost:5234
+
+GET {{eCom.Inventory_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

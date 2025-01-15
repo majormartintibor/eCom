@@ -1,0 +1,6 @@
+@eCom.ShoppingCart_HostAddress = http://localhost:5124
+
+GET {{eCom.ShoppingCart_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
