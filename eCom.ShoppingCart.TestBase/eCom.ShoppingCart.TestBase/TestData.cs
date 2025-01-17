@@ -21,7 +21,16 @@ public static class TestData
             [new Item(
                 Guid.NewGuid(), 
                 DefaultItemQuantity, 
-                DefaultItemUnitPrice)]);    
+                DefaultItemUnitPrice)]);
+
+    public static Cart SubmittedCart()
+        => new(
+            Guid.NewGuid(),
+            [new Item(
+                Guid.NewGuid(),
+                DefaultItemQuantity,
+                DefaultItemUnitPrice)],
+            true);
 
     public static CartDetails CreateCartDetails()
         => new (Guid.NewGuid(), [], default);

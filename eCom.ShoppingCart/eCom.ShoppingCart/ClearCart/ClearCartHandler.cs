@@ -11,8 +11,8 @@ public static class ClearCartHandler
         ClearCart command,
         Cart cart)
     {
-        var events = new Events();
-        var messages = new OutgoingMessages();
+        Events events = [];
+        OutgoingMessages messages = [];
 
         events.Add(
             new CartCleared(command.CartId));

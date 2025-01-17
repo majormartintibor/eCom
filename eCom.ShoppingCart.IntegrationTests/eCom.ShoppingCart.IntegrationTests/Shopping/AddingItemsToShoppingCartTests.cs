@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace eCom.ShoppingCart.IntegrationTests.Shopping;
 
-public class ShoppingTests(AppFixture fixture) : GivenCartExists(fixture), IAsyncLifetime
+public class AddingItemsToShoppingCartTests(AppFixture fixture) : GivenCartExists(fixture), IAsyncLifetime
 {
     [Fact]
     public async Task Adding_an_item_to_not_existing_cart_creates_cart()
@@ -64,47 +64,5 @@ public class ShoppingTests(AppFixture fixture) : GivenCartExists(fixture), IAsyn
        
         cart.Items.FirstOrDefault(i => i.ItemId == request.ItemId).ShouldNotBeNull();
         cart.Items.Count.ShouldBe(2);
-    }
-
-    [Fact]
-    public async Task Removing_an_existing_item_compeltely_removes_it_from_the_item_list()
-    {
-        _ = await Host.RemoveItem(
-            new RemoveItem.RemoveItemRequest(
-                Cart.Id,
-                Cart.Items[0].ItemId,
-                Cart.Items[0].Quantity));
-
-        var cartResult = await Host.GetCartDetails(Cart.Id);
-        var cart = await cartResult.ReadAsJsonAsync<CartDetails>();
-
-        cart.Items.Count.ShouldBe(0);
-    }
-
-    [Fact]
-    public async Task Removing_an_existing_item_decreases_quantity()
-    {
-        _ = await Host.RemoveItem(
-            new RemoveItem.RemoveItemRequest(
-                Cart.Id,
-                Cart.Items[0].ItemId,
-                Cart.Items[0].Quantity - 1));
-
-        var cartResult = await Host.GetCartDetails(Cart.Id);
-        var cart = await cartResult.ReadAsJsonAsync<CartDetails>();
-
-        cart.Items[0].Quantity.ShouldBe(1);
-    }
-
-    [Fact]
-    public async Task Clearing_a_cart_clears_item_list()
-    {
-        _ = await Host.ClearCart(
-            new ClearCart.ClearCartRequest(Cart.Id));
-
-        var cartResult = await Host.GetCartDetails(Cart.Id);
-        var cart = await cartResult.ReadAsJsonAsync<CartDetails>();
-
-        cart.Items.Count.ShouldBe(0);
-    }
+    }   
 }

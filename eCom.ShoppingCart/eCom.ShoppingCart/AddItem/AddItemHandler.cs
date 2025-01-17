@@ -11,8 +11,8 @@ public static class AddItemHandler
         AddItem command,
         Cart cart)
     {
-        var events = new Events();
-        var messages = new OutgoingMessages();
+        Events events = [];
+        OutgoingMessages messages = [];
 
         events.Add(
             new ItemAdded(

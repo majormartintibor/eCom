@@ -19,7 +19,10 @@
 
   <ItemGroup>
     <Folder Include="SubmittedCart\" />
-    <Folder Include="SubmitCart\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\eCom.Contracts\eCom.Contracts\eCom.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

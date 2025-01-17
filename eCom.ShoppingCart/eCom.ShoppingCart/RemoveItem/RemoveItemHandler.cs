@@ -11,8 +11,8 @@ public static class RemoveItemHandler
         RemoveItem command,
         Cart cart)
     {
-        var events = new Events();
-        var messages = new OutgoingMessages();
+        Events events = [];
+        OutgoingMessages messages = [];
 
         if (cart.Items.FirstOrDefault(i => i.ItemId == command.ItemId) is null)
         {

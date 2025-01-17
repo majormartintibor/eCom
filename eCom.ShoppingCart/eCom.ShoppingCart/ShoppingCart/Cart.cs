@@ -2,10 +2,11 @@
 using eCom.ShoppingCart.ClearCart;
 using eCom.ShoppingCart.CreateCart;
 using eCom.ShoppingCart.RemoveItem;
+using eCom.ShoppingCart.SubmitCart;
 
 namespace eCom.ShoppingCart.ShoppingCart;
 
-public sealed record Cart(Guid Id, List<Item> Items)
+public sealed record Cart(Guid Id, List<Item> Items, bool IsSubmitted = false)
 {
     public static Cart Create(CartCreated created) => new(created.Id, []);
 
@@ -17,6 +18,9 @@ public sealed record Cart(Guid Id, List<Item> Items)
 
     public Cart Apply(CartCleared cartCleared) =>
         this with { Items = [] };
+
+    public Cart Apply(CartSubmitted cartSubmitted) =>
+        this with { IsSubmitted = true };
 
     private static List<Item> AddToItems(List<Item> items, ItemAdded itemAdded)
     {
