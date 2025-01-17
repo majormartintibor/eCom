@@ -1,11 +1,12 @@
 ﻿using eCom.ShoppingCart.AddItem;
+using eCom.ShoppingCart.TestBase;
 using Shouldly;
 
 namespace eCom.ShoppingCart.UnitTests.AddItem;
 public class AddItemTests : BaseTest
 {
     [Fact]
-    public void Handling_AddItemCommand_Should_Return_ItemAddedEvent()
+    public void Handling_additem_command_should_return_itemadded_event()
     {
         eCom.ShoppingCart.AddItem.AddItem command 
             = new(
@@ -20,7 +21,7 @@ public class AddItemTests : BaseTest
     }
 
     [Fact]
-    public void Handle_AddItemCommand_ShouldReturn_ExpectedItemAddedEvent()
+    public void Handle_additem_command_should_return_expected_itemadded_event()
     {
         eCom.ShoppingCart.AddItem.AddItem command
             = new(

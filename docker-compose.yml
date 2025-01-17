@@ -148,7 +148,7 @@ services:
     shoppingcart:
       build:
         context: .
-        dockerfile: eCom.ShoppingCart/Dockerfile
+        dockerfile: eCom.ShoppingCart/eCom.ShoppingCart/Dockerfile
       container_name: ShoppingCart
       environment: 
         - ASPNETCORE_ENVIRONMENT=Development 
@@ -169,20 +169,20 @@ services:
         - 5438:5432
 
 # UI
-    ui:
-     build:
-       context: .
-       dockerfile: eCom.UI/Dockerfile
-     container_name: UI
-     # environment:
-     #    - ASPNETCORE_ENVIRONMENT=Development
-     #    - API_BASE_URL=https://api.example.com
-     #    - AUTHORITY=https://identity.example.com
-     #    - CLIENT_ID=myclientid
-     #    - REDIRECT_URI=https://app.example.com/authentication/login-callback
-     #    - POST_LOGOUT_REDIRECT_URI=https://app.example.com/authentication/logout-callback
-     ports:
-       - 8080:80
+    # ui:
+    #  build:
+    #    context: .
+    #    dockerfile: eCom.UI/Dockerfile
+    #  container_name: UI
+    #  # environment:
+    #  #    - ASPNETCORE_ENVIRONMENT=Development
+    #  #    - API_BASE_URL=https://api.example.com
+    #  #    - AUTHORITY=https://identity.example.com
+    #  #    - CLIENT_ID=myclientid
+    #  #    - REDIRECT_URI=https://app.example.com/authentication/login-callback
+    #  #    - POST_LOGOUT_REDIRECT_URI=https://app.example.com/authentication/logout-callback
+    #  ports:
+    #    - 8080:80
 
 # INFRA
 

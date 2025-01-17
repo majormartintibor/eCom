@@ -1,4 +1,5 @@
 ﻿using eCom.ShoppingCart.RemoveItem;
+using eCom.ShoppingCart.TestBase;
 using Shouldly;
 
 namespace eCom.ShoppingCart.UnitTests.RemoveItem;
@@ -6,7 +7,7 @@ namespace eCom.ShoppingCart.UnitTests.RemoveItem;
 public class RemoveItemTests : BaseTest
 {
     [Fact]
-    public void Handling_RemoveItemCommand_Should_Return_ItemRemovedEvent()
+    public void Handling_removeitem_command_should_return_itemremoved_event()
     {
         var cart = TestData.CartWithOneItem();
 
@@ -22,7 +23,7 @@ public class RemoveItemTests : BaseTest
     }
 
     [Fact]
-    public void Handle_AddItemCommand_ShouldReturn_ExpectedItemAddedEvent()
+    public void Handle_additem_command_should_return_expected_itemadded_event()
     {
         var cart = TestData.CartWithOneItem();
         int quantity = _faker.Random.Int(1, TestData.DefaultItemQuantity - 1);
@@ -41,7 +42,7 @@ public class RemoveItemTests : BaseTest
     }
 
     [Fact]
-    public void Handle_AddItemCommand_WithWrongItemId_Throws_InvalidOperationException()
+    public void Handle_additem_command_with_wrong_item_id_throws_invalidoperationexception()
     {
         var cart = TestData.CartWithOneItem();
 

@@ -2,21 +2,41 @@
 using eCom.ShoppingCart.ClearCart;
 using eCom.ShoppingCart.CreateCart;
 using eCom.ShoppingCart.RemoveItem;
+using Marten.Events.Aggregation;
 
-namespace eCom.ShoppingCart.ShoppingCart;
+namespace eCom.ShoppingCart.ShoppingCart.Projections.CartDetails;
 
-public sealed record Cart(Guid Id, List<Item> Items)
+public sealed record CartDetails(
+    Guid Id,
+    List<Item> Items,
+    int Version = 1)
 {
-    public static Cart Create(CartCreated created) => new(created.Id, []);
+    public decimal TotalPrice =>
+        Items.Sum(item => item.Quantity * item.UnitPrice);
+}
 
-    public  Cart Apply(ItemAdded itemAdded) =>
-        this with { Items = AddToItems(Items, itemAdded) };
+public sealed class CartDetailsProjection : SingleStreamProjection<CartDetails>
+{
+    public static CartDetails Create(CartCreated created) =>
+        new(created.Id, [], default);
 
-    public Cart Apply(ItemRemoved itemRemoved) =>
-        this with { Items = RemoveFromItems(Items, itemRemoved) };
+    public static CartDetails Apply(ItemAdded itemAdded, CartDetails current) =>
+        current with
+        {
+            Items = AddToItems(current.Items, itemAdded)
+        };
 
-    public Cart Apply(CartCleared cartCleared) =>
-        this with { Items = [] };
+    public static CartDetails Apply(ItemRemoved itemRemoved, CartDetails current) =>
+        current with
+        {
+            Items = RemoveFromItems(current.Items, itemRemoved)
+        };
+
+    public static CartDetails Apply(CartCleared cartCleared, CartDetails current) =>
+        current with
+        {
+            Items = []           
+        };
 
     private static List<Item> AddToItems(List<Item> items, ItemAdded itemAdded)
     {
@@ -34,11 +54,11 @@ public sealed record Cart(Guid Id, List<Item> Items)
         //We trust the data stored in our system, validation that a non-existing item
         //cannot be removed happened in the AggregateHandler
         var existingItem = items.First(i => i.ItemId == itemRemoved.ItemId);
-        
+
         var updatedItem = existingItem.AddQuantity(-itemRemoved.Quantity);
 
         return updatedItem.Quantity > 0
             ? items.Select(i => i.ItemId == itemRemoved.ItemId ? updatedItem : i).ToList()
             : items.Where(i => i.ItemId != itemRemoved.ItemId).ToList();
-    }    
+    }
 }

@@ -1,0 +1,24 @@
+services:
+
+    shoppingcart:
+      build:
+        context: .
+        dockerfile: eCom.ShoppingCart/eCom.ShoppingCart/Dockerfile
+      container_name: ShoppingCart
+      environment: 
+        - ASPNETCORE_ENVIRONMENT=Development 
+        - ASPNETCORE_URLS=http://+:80
+      ports:
+        - 5006:80            
+      depends_on:
+        - shoppingcart.database 
+
+    shoppingcart.database:
+      image: postgres:latest
+      container_name: ShoppingCartDatabase
+      environment:
+        - POSTGRES_DB=ShoppingCartDb
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+      ports:
+        - 5438:5432    

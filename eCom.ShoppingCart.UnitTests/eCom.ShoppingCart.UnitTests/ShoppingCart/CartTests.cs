@@ -1,13 +1,14 @@
 ﻿using eCom.ShoppingCart.CreateCart;
 using eCom.ShoppingCart.ShoppingCart;
+using eCom.ShoppingCart.TestBase;
 using Shouldly;
 
 namespace eCom.ShoppingCart.UnitTests.ShoppingCart;
 
-public class ShoppingCartTests : BaseTest
+public class CartTests : BaseTest
 {
     [Fact]
-    public void CartCreated_creates_Cart()
+    public void CartCreated_creates_cart()
     {
         Guid cartId = Guid.NewGuid();
 
@@ -20,7 +21,7 @@ public class ShoppingCartTests : BaseTest
     }
 
     [Fact]
-    public void AddNewItem_adds_item()
+    public void ItemAdded_adds_item()
     {
         Cart cart = TestData.EmptyCart(Guid.NewGuid());
 
@@ -36,14 +37,14 @@ public class ShoppingCartTests : BaseTest
         cart.Items
             .Single()
             .ShouldBe(
-                new Cart.Item(
+                new Item(
                     itemAdded.ItemId, 
                     itemAdded.Quantity, 
                     itemAdded.UnitPrice));
     }
 
     [Fact]
-    public void AddExisitingItem_increases_quantity()
+    public void Add_exisiting_item_increases_quantity()
     {
         Cart cart = TestData.CartWithOneItem();        
         int quantityToIncrease = _faker.Random.Int();
@@ -64,7 +65,7 @@ public class ShoppingCartTests : BaseTest
     }
 
     [Fact]
-    public void AddNotExistingItem_to_CartWithItem_adds_NewItem()
+    public void Add_not_existing_item_to_cart_with_item_adds_new_item()
     {
         Cart cart = TestData.CartWithOneItem();
 
@@ -79,14 +80,14 @@ public class ShoppingCartTests : BaseTest
 
         cart.Items
             .First(i => i.ItemId == itemAdded.ItemId)
-            .ShouldBe(new Cart.Item(
+            .ShouldBe(new Item(
                 itemAdded.ItemId, 
                 itemAdded.Quantity, 
                 itemAdded.UnitPrice));
     }
 
     [Fact]
-    public void ReducingExistingItemQuantity_decreases_quantity()
+    public void Reducing_existing_items_quantity_decreases_quantity()
     {
         Cart cart = TestData.CartWithOneItem();        
         int quantityToDecrease = _faker.Random.Int(1, TestData.DefaultItemQuantity - 1);
@@ -106,7 +107,7 @@ public class ShoppingCartTests : BaseTest
     }
 
     [Fact]
-    public void RemovingExistingItem_removes_Item()
+    public void Removing_existing_item_removes_item()
     {
         Cart cart = TestData.CartWithOneItem();                
 
@@ -122,7 +123,7 @@ public class ShoppingCartTests : BaseTest
     }
 
     [Fact]
-    public void ClearingCart_clears_Cart()
+    public void Clearing_cart_clears_cart()
     {
         Cart cart = TestData.CartWithOneItem();
 

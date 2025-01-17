@@ -4,6 +4,7 @@ using Wolverine.Http;
 using eCom.ShoppingCart.CreateCart;
 using Marten;
 using eCom.ShoppingCart.ShoppingCart;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eCom.ShoppingCart.AddItem;
 
@@ -11,6 +12,7 @@ public static class AddItemEndpoint
 {
     public const string Enpoint = "/api/shoppingcart/additem";
 
+    [AllowAnonymous]
     [Tags("ShoppingCart")]
     [ProducesResponseType(200)]
     [WolverinePost(Enpoint)]

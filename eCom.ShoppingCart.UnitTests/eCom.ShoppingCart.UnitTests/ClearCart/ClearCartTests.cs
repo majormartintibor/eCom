@@ -1,5 +1,5 @@
-﻿using eCom.ShoppingCart.AddItem;
-using eCom.ShoppingCart.ClearCart;
+﻿using eCom.ShoppingCart.ClearCart;
+using eCom.ShoppingCart.TestBase;
 using Shouldly;
 
 namespace eCom.ShoppingCart.UnitTests.ClearCart;
@@ -7,7 +7,7 @@ namespace eCom.ShoppingCart.UnitTests.ClearCart;
 public class ClearCartTests : BaseTest
 {
     [Fact]
-    public void Handling_ClearCartCommand_Should_Return_CartCleared()
+    public void Handling_clear_cart_command_should_return_cartcleared()
     {
         eCom.ShoppingCart.ClearCart.ClearCart command = new(default);
 
@@ -17,7 +17,7 @@ public class ClearCartTests : BaseTest
     }
 
     [Fact]
-    public void Handle_ClearCartCommand_ShouldReturn_ExpectedCartClearedEvent()
+    public void Handle_clearcart_command_should_return_expected_cartcleared_Event()
     {
         Guid cartId = Guid.NewGuid();
         eCom.ShoppingCart.ClearCart.ClearCart command = new(cartId);

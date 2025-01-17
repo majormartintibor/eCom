@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Wolverine.Http;
 using Wolverine;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eCom.ShoppingCart.RemoveItem;
 
@@ -8,6 +9,7 @@ public static class RemoveItemEndpoint
 {
     public const string Enpoint = "/api/shoppingcart/removeitem";
 
+    [AllowAnonymous]
     [Tags("ShoppingCart")]
     [ProducesResponseType(200)]
     [WolverinePost(Enpoint)]
